@@ -90,7 +90,7 @@ public class LiburuKud implements Initializable {
     public void initialize(URL location, ResourceBundle resources){}
 
 
-   public void liburuzBeteHasieraketa() {
+   /*public void liburuzBeteHasieraketa() {
 
         ObservableList<LiburuDetaileak> liburuList = FXCollections.observableArrayList();
         liburuList.addAll(
@@ -104,5 +104,5 @@ public class LiburuKud implements Initializable {
         this.comboZerbitzua.setItems(liburuList);
         this.comboZerbitzua.setEditable(false);
         this.comboBoxekoEtiketaEguneratu();
-    }
+    }*/
 }
