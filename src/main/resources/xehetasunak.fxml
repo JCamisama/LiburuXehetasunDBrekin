@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="panelNagusiaOpenLib" minHeight="0.0" minWidth="0.0" prefHeight="417.0" prefWidth="642.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ehu.isad.controller.XehetasunKud">
+   <children>
+      <Text fx:id="tituluaLiburuXeheta" layoutX="119.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liburuaren Xehetasunak:">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Text>
+      <Text fx:id="izenburuText" layoutX="65.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Izenburua:" />
+      <Text fx:id="izenburuContainer" layoutX="209.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="argitaletxeText" layoutX="63.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Argitaletxea:" />
+      <Text fx:id="argitaletxeContainer" layoutX="209.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="orriKopText" layoutX="71.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Orri. Kop.:" />
+      <Text fx:id="orriKopContainer" layoutX="209.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="irudiaText" layoutX="79.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Irudia:" />
+      <Button fx:id="atzeraBotoi" layoutX="291.0" layoutY="377.0" mnemonicParsing="false" onAction="#onClickBotoian" text="Atzera" />
+      <ImageView fx:id="irudiContainer" fitHeight="150.0" fitWidth="200.0" layoutX="221.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>
