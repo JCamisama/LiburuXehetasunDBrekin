@@ -101,17 +101,17 @@ public class ZerbitzuKud {
     private String liburuaUpdateEskaeraPrestatu(LiburuDetaileak pLibDetaileak, String pIsbn){
 
         String  izenburu     = pLibDetaileak.getIzena();
-        int     orriKop         = pLibDetaileak.getOrriKop();
+        int     orriKop      = pLibDetaileak.getOrriKop();
         String  argitaletxe  = pLibDetaileak.getArgitaletxeak()[0];
         String  irudia       = "EzerEzOraingoz";//pLibDetaileak.getIrudiaIzena();
 
-        String query = "update liburuak" +
+        String query = "update liburuak " +
                 "set " +
-                "izenburu = '"+izenburu+"', " +
-                "argitaletxe = '"+argitaletxe+"', " +
+                "izenburu = \""+izenburu+"\", " +
+                "argitaletxe = \""+argitaletxe+"\", " +
                 "orriKop = "+orriKop+", " +
-                "irudia = '"+irudia+"' " +
-                "where isbn = '" +pIsbn+"';";
+                "irudia = \""+irudia+"\" " +
+                "where isbn = \"" +pIsbn+"\";";
 
         return query;
     }
