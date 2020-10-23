@@ -26,7 +26,7 @@ public class XehetasunKud {
         this.izenburuContainer.setText( pDetaileak.getIzena() );
         this.argitaletxeContainer.setText( pDetaileak.getArgitaletxeak()[0] );
         this.orriKopContainer.setText( String.valueOf( pDetaileak.getOrriKop() ) );
-        this.irudiContainer.setImage(pDetaileak.getIrudia());
+       // this.irudiContainer.setImage(pDetaileak.getIrudia());
     }
 
     public void setMainApp(Liburuak liburuak) {

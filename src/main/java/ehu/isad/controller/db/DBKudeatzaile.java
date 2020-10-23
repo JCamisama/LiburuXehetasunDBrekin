@@ -1,5 +1,6 @@
 package ehu.isad.controller.db;
 
+import ehu.isad.modeloak.LiburuDetaileak;
 import ehu.isad.utils.Utils;
 
 import java.lang.reflect.InvocationTargetException;
@@ -72,4 +73,6 @@ public class DBKudeatzaile {
 		}
 		return rs;
 	}
+
+
 }

@@ -1,5 +1,10 @@
 package ehu.isad.controller.db;
 
+import ehu.isad.modeloak.LiburuDetaileak;
+import ehu.isad.utils.Sarea;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,30 +21,56 @@ public class ZerbitzuKud {
     private ZerbitzuKud() {
     }
 
-    public List<String> lortuZerbitzuak() {
+    public ObservableList<LiburuDetaileak> lortuLiburuak() {
+        //liburu taulako zutabeak: isbn, izenburu, argitaletxe, orriKop, irudia
 
-        String query = "select id, izena from services";
-        DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
-        ResultSet rs = dbKudeatzaile.execSQL(query);
+        ObservableList<LiburuDetaileak> liburuList = FXCollections.observableArrayList();
+        LiburuDetaileak detaileak;
+        ResultSet rSet = this.liburuakEskatuDatuBaseari();
 
-        List<String> emaitza = new ArrayList<>();
         try {
-            while (rs.next()) {
-
-                int kodea = rs.getInt("id");
-                String izena = rs.getString("izena");
-
-                System.out.println(kodea + ":" + izena);
-                emaitza.add(izena);
-
+            while (rSet.next()) {
+                detaileak = this.detaileakLortu(rSet);
+                liburuList.add(detaileak);
             }
         } catch(SQLException throwables){
             throwables.printStackTrace();
         }
 
-        return emaitza;
+        return liburuList;
     }
 
+    private ResultSet liburuakEskatuDatuBaseari(){
+
+        String query = "select isbn, izenburu, argitaletxe, " +
+                "orriKop, irudia from liburuak";
+        DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
+        ResultSet rs = dbKudeatzaile.execSQL(query);
+
+        return rs;
+    }
+
+    private LiburuDetaileak detaileakLortu(ResultSet pLiburuZerre) throws SQLException {
+
+        //AurreB: Datu-Baseko liburuak izena badauka, gainerako datu guztiak izango ditu.
+
+        LiburuDetaileak detaileak;
+
+        String isbn = pLiburuZerre.getString("isbn");
+        String izenburu = pLiburuZerre.getString("izenburu");
+        if(pLiburuZerre.wasNull()){
+            detaileak = new LiburuDetaileak(isbn);
+        }
+        else{
+            String argitaletxea = pLiburuZerre.getString("argitaletxe");
+            int orriKop = pLiburuZerre.getInt("orriKop");
+            String irudia = pLiburuZerre.getString("irudia");
+
+            detaileak = new LiburuDetaileak(isbn, izenburu, orriKop, argitaletxea, irudia);//the bug is here!
+        }
+
+        return detaileak;
+    }
     public void ezabatuZerbitzua(String ezabatuBeharrekoa) {
 
         String aldaketa = "delete from services where izena='"+ezabatuBeharrekoa+"';";
@@ -52,5 +83,36 @@ public class ZerbitzuKud {
         String updateAdd = "insert into services(`izena`) values('"+gehituBeharrekoa+"');";
         DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
         dbKudeatzaile.execSQL(updateAdd);
+    }
+
+    public LiburuDetaileak liburuaEguneratu(String pIsbn) {
+
+        //Liburua lortzen OpenLibrary-tik
+        LiburuDetaileak libHau = Sarea.bilatuLiburuaIsbnrekin(pIsbn);
+
+        //Liburuaren datuak datu basean erregistratzen
+        String updateEskaera = this.liburuaUpdateEskaeraPrestatu(libHau, pIsbn);
+        DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
+        dbKudeatzaile.execSQL(updateEskaera);
+
+        return libHau;
+    }
+
+    private String liburuaUpdateEskaeraPrestatu(LiburuDetaileak pLibDetaileak, String pIsbn){
+
+        String  izenburu     = pLibDetaileak.getIzena();
+        int     orriKop         = pLibDetaileak.getOrriKop();
+        String  argitaletxe  = pLibDetaileak.getArgitaletxeak()[0];
+        String  irudia       = "EzerEzOraingoz";//pLibDetaileak.getIrudiaIzena();
+
+        String query = "update liburuak" +
+                "set " +
+                "izenburu = '"+izenburu+"', " +
+                "argitaletxe = '"+argitaletxe+"', " +
+                "orriKop = "+orriKop+", " +
+                "irudia = '"+irudia+"' " +
+                "where isbn = '" +pIsbn+"';";
+
+        return query;
     }
 }

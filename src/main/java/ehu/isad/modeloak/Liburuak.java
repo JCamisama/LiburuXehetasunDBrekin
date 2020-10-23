@@ -37,7 +37,7 @@ public class Liburuak extends Application {
         this.stage = primaryStage;
         pantailakKargatu();
 
-        this.stage.setTitle("OpenLibrary APIa aztertzen");
+        this.stage.setTitle("OpenLibrary APIa eta Datu Basea aztertzen");
         this.eszenaLib = new Scene(this.liburuakUI, 450, 200);
         this.eszenaXeh = new Scene(this.xehetasunakUI, 900, 500);
 
@@ -50,7 +50,7 @@ public class Liburuak extends Application {
         FXMLLoader loaderLiburuak = new FXMLLoader(getClass().getResource(this.liburuenLeihoa));
         this.liburuakUI = (Parent) loaderLiburuak.load();
         this.liburuKud = loaderLiburuak.getController();
-        this.liburuKud.liburuzBeteHasieraketa();
+        this.liburuKud.liburuzBete();
         this.liburuKud.setMainApp(this);
 
         FXMLLoader loaderXehe = new FXMLLoader(getClass().getResource(this.xehetasunenLeihoa));

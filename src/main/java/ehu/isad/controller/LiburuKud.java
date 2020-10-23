@@ -1,6 +1,7 @@
 package ehu.isad.controller;
 
 
+import ehu.isad.controller.db.ZerbitzuKud;
 import ehu.isad.modeloak.LiburuDetaileak;
 import ehu.isad.utils.Sarea;
 import ehu.isad.modeloak.Liburuak;
@@ -24,26 +25,20 @@ public class LiburuKud implements Initializable {
     private LiburuDetaileak unekoLiburua;
 
     @FXML
-    private ComboBox    comboZerbitzua;
+    private ComboBox    comboLiburuak;
     @FXML
     private Button      ikusiBotoia;
-
 
     //Metodoak
     public void liburuzBete() throws IOException {
 
-        ObservableList<LiburuDetaileak> liburuList = FXCollections.observableArrayList();
-        liburuList.addAll(
-                Sarea.bilatuLiburuaIsbnrekin("9781491920497"),
-                Sarea.bilatuLiburuaIsbnrekin("1491910399"),
-                Sarea.bilatuLiburuaIsbnrekin("1491946008"),
-                Sarea.bilatuLiburuaIsbnrekin("1491978236"),
-                Sarea.bilatuLiburuaIsbnrekin("9781491906187")
-        );
+        ZerbitzuKud zerbitzuak = ZerbitzuKud.getInstance();
+        ObservableList<LiburuDetaileak> liburuList = zerbitzuak.lortuLiburuak();
 
-        this.comboZerbitzua.setItems(liburuList);
-        this.comboZerbitzua.setEditable(false);
+        this.comboLiburuak.setItems(liburuList);
+        this.comboLiburuak.setEditable(false);
         this.comboBoxekoEtiketaEguneratu();
+        this.unekoLiburua = liburuList.get(0);
     }
 
     @FXML
@@ -55,19 +50,30 @@ public class LiburuKud implements Initializable {
 
     @FXML
     public void onClickBotoian(){
+        if(this.unekoLiburua.getIzena().equals(""))
+        {
+            String isbn = this.unekoLiburua.getIsbn();
+            this.comboLiburuak.getItems().remove(this.unekoLiburua);
+            this.unekoLiburua = ZerbitzuKud.getInstance().liburuaEguneratu(isbn);
+            this.comboLiburuak.getItems().add(this.unekoLiburua);
+        }
         this.liburuApp.xehetasunakErakutsi(this.unekoLiburua);
     }
 
 
     private void comboBoxekoEtiketaEguneratu(){
 
-        this.comboZerbitzua.setConverter(new StringConverter<LiburuDetaileak>() {
+        this.comboLiburuak.setConverter(new StringConverter<LiburuDetaileak>() {
 
             @Override
             public String toString(LiburuDetaileak pDetaileak) {
                 if (pDetaileak == null) {
                     return "";
-                } else {
+                }
+                else if (pDetaileak.getIzena().equals("")) {
+                    return pDetaileak.getIsbn();
+                }
+                else{
                     return pDetaileak.getIzena();
                 }
             }
@@ -79,7 +85,7 @@ public class LiburuKud implements Initializable {
     }
 
     private void unekoLiburuaEguneratu(){
-            this.unekoLiburua = (LiburuDetaileak)this.comboZerbitzua.getValue();
+            this.unekoLiburua = (LiburuDetaileak)this.comboLiburuak.getValue();
     }
 
     public void setMainApp(Liburuak liburuak) {

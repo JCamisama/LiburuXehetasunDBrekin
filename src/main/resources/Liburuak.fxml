@@ -8,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="285.0" prefWidth="530.0" styleClass="background" stylesheets="@bootstrap3.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ehu.isad.controller.LiburuKud">
    <children>
-      <ComboBox fx:id="comboZerbitzua" layoutX="89.0" layoutY="86.0" onAction="#onClickComboBoxen" prefHeight="27.0" prefWidth="167.0" />
+      <ComboBox fx:id="comboLiburuak" layoutX="89.0" layoutY="86.0" onAction="#onClickComboBoxen" prefHeight="27.0" prefWidth="167.0" />
       <Label fx:id="nstrukzioMezua" layoutX="89.0" layoutY="53.0" text="Liburu bat hautatu" />
       <Button fx:id="ikusiBotoia" alignment="CENTER" layoutX="89.0" layoutY="143.0" mnemonicParsing="false" onAction="#onClickBotoian" text="Ikusi">
          <styleClass>
