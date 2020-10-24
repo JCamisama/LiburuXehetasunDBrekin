@@ -1,6 +1,7 @@
 package ehu.isad.utils;
 
 import com.google.gson.Gson;
+import ehu.isad.controller.fitxategiak.IrudiKud;
 import ehu.isad.modeloak.LiburuDetaileak;
 import ehu.isad.modeloak.Liburua;
 import javafx.scene.image.Image;
@@ -32,7 +33,7 @@ public class Sarea {
         //Liburuaren informazio osoa ez dugula behar, detaileak bakarrik hartuko dira
         String[] zatiak = jsonFormatukoLerroa.split("ISBN:"+pIsbn+"\":");
         String liburukoInfo = zatiak[1].substring(0, zatiak[1].length()-1);
-        detaileak = detaileakEmanLiburukoInfotik(liburukoInfo);
+        detaileak = detaileakEmanLiburukoInfotik(liburukoInfo, pIsbn);
 
         return detaileak;
     }
@@ -57,13 +58,15 @@ public class Sarea {
         return jsonTestua;
     }
 
-    private static LiburuDetaileak detaileakEmanLiburukoInfotik(String pLiburukoInfo) {
+    private static LiburuDetaileak detaileakEmanLiburukoInfotik(String pLiburukoInfo, String pIsbn) {
+
         Gson gson = new Gson();
         Liburua liburu = gson.fromJson(pLiburukoInfo, Liburua.class);
         LiburuDetaileak detaileak = liburu.getDetails();
+        detaileak.setIsbn(pIsbn);
         String irudiaUrl = liburu.getIrudiarenUrl();
         try{
-            detaileak.setIrudia( Sarea.createImage(irudiaUrl) );
+            Sarea.irudiaSortu(irudiaUrl, detaileak);
         }
         catch (IOException ioException){
             ioException.printStackTrace();
@@ -71,6 +74,15 @@ public class Sarea {
 
         return detaileak;
     }
+
+    private static void irudiaSortu(String pIrudiUrl, LiburuDetaileak pDetaileak) throws IOException{
+
+        Image irudia = Sarea.createImage(pIrudiUrl);
+        String formatua = IrudiKud.getInstantzia().irudiaGorde(irudia, pDetaileak.getIsbn());
+        pDetaileak.irudiIzenaSortu(formatua);
+
+    }
+
 
     private static Image createImage(String url) throws IOException {
         URLConnection conn = new URL(url).openConnection();

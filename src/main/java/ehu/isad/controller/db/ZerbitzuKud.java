@@ -21,8 +21,8 @@ public class ZerbitzuKud {
     private ZerbitzuKud() {
     }
 
+
     public ObservableList<LiburuDetaileak> lortuLiburuak() {
-        //liburu taulako zutabeak: isbn, izenburu, argitaletxe, orriKop, irudia
 
         ObservableList<LiburuDetaileak> liburuList = FXCollections.observableArrayList();
         LiburuDetaileak detaileak;
@@ -40,6 +40,7 @@ public class ZerbitzuKud {
         return liburuList;
     }
 
+
     private ResultSet liburuakEskatuDatuBaseari(){
 
         String query = "select isbn, izenburu, argitaletxe, " +
@@ -49,6 +50,8 @@ public class ZerbitzuKud {
 
         return rs;
     }
+
+
 
     private LiburuDetaileak detaileakLortu(ResultSet pLiburuZerre) throws SQLException {
 
@@ -71,6 +74,8 @@ public class ZerbitzuKud {
 
         return detaileak;
     }
+
+
     public void ezabatuZerbitzua(String ezabatuBeharrekoa) {
 
         String aldaketa = "delete from services where izena='"+ezabatuBeharrekoa+"';";
@@ -78,12 +83,14 @@ public class ZerbitzuKud {
         dbKudeatzaile.execSQL(aldaketa);
     }
 
+
     public void gehituZerbitzua(String gehituBeharrekoa) {
 
         String updateAdd = "insert into services(`izena`) values('"+gehituBeharrekoa+"');";
         DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
         dbKudeatzaile.execSQL(updateAdd);
     }
+
 
     public LiburuDetaileak liburuaEguneratu(String pIsbn) {
 
@@ -98,12 +105,15 @@ public class ZerbitzuKud {
         return libHau;
     }
 
+
     private String liburuaUpdateEskaeraPrestatu(LiburuDetaileak pLibDetaileak, String pIsbn){
+
+        //liburu taulako zutabeak: isbn, izenburu, argitaletxe, orriKop, irudia
 
         String  izenburu     = pLibDetaileak.getIzena();
         int     orriKop      = pLibDetaileak.getOrriKop();
         String  argitaletxe  = pLibDetaileak.getArgitaletxeak()[0];
-        String  irudia       = "EzerEzOraingoz";//pLibDetaileak.getIrudiaIzena();
+        String  irudia       = pLibDetaileak.getIrudiaIzena();
 
         String query = "update liburuak " +
                 "set " +

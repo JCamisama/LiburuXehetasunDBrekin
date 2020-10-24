@@ -1,4 +1,4 @@
-package ehu.isad.controller;
+package ehu.isad.controller.ui;
 
 
 import ehu.isad.controller.db.ZerbitzuKud;
@@ -44,20 +44,32 @@ public class LiburuKud implements Initializable {
     @FXML
     public void onClickComboBoxen(ActionEvent actionEvent) {
 
-        this.comboBoxekoEtiketaEguneratu();
+        //this.comboBoxekoEtiketaEguneratu();
         this.unekoLiburuaEguneratu();
+        this.comboBoxekoEtiketaEguneratu();
     }
 
     @FXML
     public void onClickBotoian(){
         if(this.unekoLiburua.getIzena().equals(""))
         {
-            String isbn = this.unekoLiburua.getIsbn();
-            this.comboLiburuak.getItems().remove(this.unekoLiburua);
-            this.unekoLiburua = ZerbitzuKud.getInstance().liburuaEguneratu(isbn);
-            this.comboLiburuak.getItems().add(this.unekoLiburua);
+            this.comboBoxekoZerrendaEguneratu();
+            this.comboBoxekoEtiketaEguneratu();
         }
         this.liburuApp.xehetasunakErakutsi(this.unekoLiburua);
+    }
+
+
+    private void comboBoxekoZerrendaEguneratu(){
+
+        ObservableList<LiburuDetaileak> liburuZerrenda = this.comboLiburuak.getItems();
+
+        String isbn     = this.unekoLiburua.getIsbn();
+        int    posizioa = liburuZerrenda.indexOf(this.unekoLiburua);
+
+        liburuZerrenda.remove(this.unekoLiburua);
+        this.unekoLiburua = ZerbitzuKud.getInstance().liburuaEguneratu(isbn);
+        liburuZerrenda.add(posizioa, this.unekoLiburua);
     }
 
 

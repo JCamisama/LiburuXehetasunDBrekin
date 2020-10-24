@@ -8,7 +8,6 @@ public class LiburuDetaileak {
     private String[]    publishers;
     private String      title;
     private Integer     number_of_pages;
-    private Image       irudia;
     private String      isbn;
     private String      irudiIzena;
 
@@ -49,13 +48,14 @@ public class LiburuDetaileak {
     }
 
 
-    public Image getIrudia(){
-        return this.irudia;
-    }
-
-    public void setIrudia(Image pIrudia){
-        this.irudia = pIrudia;
+    public void irudiIzenaSortu(String pFormatua){
+        this.irudiIzena = this.isbn+"."+pFormatua;
     }
 
     public String getIrudiaIzena(){ return this.irudiIzena;}
+
+
+    public void setIsbn(String pIsbn) {
+        this.isbn = pIsbn;
+    }
 }
