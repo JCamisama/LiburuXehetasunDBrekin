@@ -1,24 +1,30 @@
 package ehu.isad.controller.fitxategiak;
 
 import ehu.isad.controller.db.DBKudeatzaile;
+import ehu.isad.utils.Utils;
 import javafx.scene.image.Image;
 
 import java.io.File;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
+import java.util.Properties;
 import javax.imageio.ImageIO;
 import javafx.embed.swing.SwingFXUtils;
 
 public class IrudiKud {
 
     //Atributuak
-    private String irudienDirektorioa = "./irudiak/";
+    private String irudienDirektorioa; // = "./irudiak/";
     private String formatua           = "png";
 
 
     //Singleton patroia
     private static IrudiKud instantzia = new IrudiKud();
-    private IrudiKud(){}
+    private IrudiKud(){
+
+        Properties ezarpenak =  Utils.lortuEzarpenak();
+        this.irudienDirektorioa = ezarpenak.getProperty("irudienDirektorioa");
+    }
     public static IrudiKud getInstantzia() {
         return IrudiKud.instantzia;
     }

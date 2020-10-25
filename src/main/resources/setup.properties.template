@@ -1,5 +1,6 @@
-dbname=
+dbname=Liburuak
 user=
 password=
 useSSL=FALSE
 serverTimezone=Europe/Madrid
+irudienDirektorioa=./irudiak/
