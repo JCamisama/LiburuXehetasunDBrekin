@@ -54,7 +54,9 @@ public class LiburuKud implements Initializable {
         if(this.unekoLiburua.getIzena().equals(""))
         {
             this.comboBoxekoZerrendaEguneratu();
+            this.comboLiburuak.setValue(this.unekoLiburua);
             this.comboBoxekoEtiketaEguneratu();
+
         }
         this.liburuApp.xehetasunakErakutsi(this.unekoLiburua);
     }
