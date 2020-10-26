@@ -44,7 +44,6 @@ public class LiburuKud implements Initializable {
     @FXML
     public void onClickComboBoxen(ActionEvent actionEvent) {
 
-        //this.comboBoxekoEtiketaEguneratu();
         this.unekoLiburuaEguneratu();
         this.comboBoxekoEtiketaEguneratu();
     }
@@ -56,7 +55,6 @@ public class LiburuKud implements Initializable {
             this.comboBoxekoZerrendaEguneratu();
             this.comboLiburuak.setValue(this.unekoLiburua);
             this.comboBoxekoEtiketaEguneratu();
-
         }
         this.liburuApp.xehetasunakErakutsi(this.unekoLiburua);
     }
@@ -110,19 +108,5 @@ public class LiburuKud implements Initializable {
     public void initialize(URL location, ResourceBundle resources){}
 
 
-   /*public void liburuzBeteHasieraketa() {
 
-        ObservableList<LiburuDetaileak> liburuList = FXCollections.observableArrayList();
-        liburuList.addAll(
-                new LiburuDetaileak("9781491920497"),
-                new LiburuDetaileak("1491910399"),
-                new LiburuDetaileak("1491946008"),
-                new LiburuDetaileak("1491978236"),
-                new LiburuDetaileak("9781491906187")
-        );
-
-        this.comboZerbitzua.setItems(liburuList);
-        this.comboZerbitzua.setEditable(false);
-        this.comboBoxekoEtiketaEguneratu();
-    }*/
 }

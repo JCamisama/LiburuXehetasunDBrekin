@@ -38,6 +38,7 @@ public class Sarea {
         return detaileak;
     }
 
+
     private static String urltikJsonFormatuanTextuaLortu(String pUrlOsoa) {
 
         String jsonTestua = "";
@@ -58,6 +59,7 @@ public class Sarea {
         return jsonTestua;
     }
 
+
     private static LiburuDetaileak detaileakEmanLiburukoInfotik(String pLiburukoInfo, String pIsbn) {
 
         Gson gson = new Gson();
@@ -74,6 +76,7 @@ public class Sarea {
 
         return detaileak;
     }
+
 
     private static void irudiaSortu(String pIrudiUrl, LiburuDetaileak pDetaileak) throws IOException{
 

@@ -14,7 +14,7 @@ import javafx.embed.swing.SwingFXUtils;
 public class IrudiKud {
 
     //Atributuak
-    private String irudienDirektorioa; // = "./irudiak/";
+    private String irudienDirektorioa;
     private String formatua           = "png";
 
 

@@ -19,7 +19,6 @@ public class LiburuDetaileak {
 
     public LiburuDetaileak(String pIsbn, String pTitle, Integer pNofPages, String pPublisher, String pImageName){
 
-
         this.isbn = pIsbn;
         this.title = pTitle;
         this.number_of_pages = pNofPages;
@@ -27,12 +26,13 @@ public class LiburuDetaileak {
 
         this.publishers = new String[10];
         this.publishers[0] = pPublisher;
-
     }
 
     //Gainontzeko metodoak
 
     public String getIsbn(){return this.isbn;}
+
+
     public String getIzena(){
         return this.title;
     }
@@ -51,6 +51,7 @@ public class LiburuDetaileak {
     public void irudiIzenaSortu(String pFormatua){
         this.irudiIzena = this.isbn+"."+pFormatua;
     }
+
 
     public String getIrudiaIzena(){ return this.irudiIzena;}
 
