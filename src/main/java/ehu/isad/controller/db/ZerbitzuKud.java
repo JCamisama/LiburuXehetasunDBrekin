@@ -69,27 +69,12 @@ public class ZerbitzuKud {
             int orriKop = pLiburuZerre.getInt("orriKop");
             String irudia = pLiburuZerre.getString("irudia");
 
-            detaileak = new LiburuDetaileak(isbn, izenburu, orriKop, argitaletxea, irudia);//the bug is here!
+            detaileak = new LiburuDetaileak(isbn, izenburu, orriKop, argitaletxea, irudia);
         }
 
         return detaileak;
     }
 
-
-    public void ezabatuZerbitzua(String ezabatuBeharrekoa) {
-
-        String aldaketa = "delete from services where izena='"+ezabatuBeharrekoa+"';";
-        DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
-        dbKudeatzaile.execSQL(aldaketa);
-    }
-
-
-    public void gehituZerbitzua(String gehituBeharrekoa) {
-
-        String updateAdd = "insert into services(`izena`) values('"+gehituBeharrekoa+"');";
-        DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
-        dbKudeatzaile.execSQL(updateAdd);
-    }
 
 
     public LiburuDetaileak liburuaEguneratu(String pIsbn) {
